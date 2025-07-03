@@ -7,7 +7,7 @@ require("dotenv").config();
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: "http://localhost:3000",
+    //baseUrl: "http://localhost:4000",
     specPattern: "cypress/e2e/**/**/*.feature",
     viewportWidth: 1920,
     viewportHeight: 1080,
@@ -21,6 +21,6 @@ module.exports = defineConfig({
   },
   env: {
     grepFilterSpecs: true,
-    FRONTEND_URL: "http://localhost:3000"
+    BACKEND_URL: "http://localhost:4000/api/v1"
   }
 })
