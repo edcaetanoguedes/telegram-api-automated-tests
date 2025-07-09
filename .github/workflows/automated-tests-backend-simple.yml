@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: edcaetanoguedes/telegram-api-backend # Ambos os repos deve estar na mesma conta/organização
+          token: ${{ secrets.GH_TELEGRAM_API_TESTS_TOKEN }}
           # Define uma pasta com nome onde o repo será clonado
           # Bom pra quando se lida com mais de um projeto (ex: frontend, backend)
           path: telegram-api-backend
