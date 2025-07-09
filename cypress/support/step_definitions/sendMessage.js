@@ -20,6 +20,7 @@ When('envio a mensagem de texto simples para o grupo via API', () => {
 Then('o status da resposta deve ser 200', () => {
     cy.get("@response").then((response) => {
         expect(response.status).to.eq(200)
+        cy.log(response.body)
     })
 })
 
@@ -38,7 +39,7 @@ When('envio a mensagem em html para o grupo via API', () => {
         apiDriver.sendMessage({
             chat_id: chatGroup.chatId,
             text: "<b>Cypress:</b> Testando",
-            parse_mode: "html"
+            parse_mode: "HTML"
         })
     })
 })
@@ -56,7 +57,7 @@ When('envio a mensagem em markdown para o grupo via API', () => {
         apiDriver.sendMessage({
             chat_id: chatGroup.chatId,
             text: "*Cypress:* Testando",
-            parse_mode: "markdown"
+            parse_mode: "Markdown"
         })
     })
 })
