@@ -9,13 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositório da aplicação (backend)
-        uses: actions/checkout@v4
-        with:
-          repository: edcaetanoguedes/telegram-api-backend
-          token: ${{ secrets.GH_TELEGRAM_API_TESTS_TOKEN }}
-          path: telegram-api-backend
-          ref: develop
+      - name: Clonar backend com git clone
+        run: |
+          git clone https://x-access-token:${{ secrets.GITHUB_TELEGRAM_API_TESTS_TOKEN }}@github.com/edcaetanoguedes/telegram-api-backend.git telegram-api-backend
+
 
       - name: Instalar dependências da aplicação (backend)
         working-directory: telegram-api-backend
