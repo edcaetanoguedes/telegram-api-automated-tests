@@ -1,52 +1,35 @@
-# Contexto: Repositório de Testes PÚBLICO somente com testes Cypress
-name: Backend Automated Tests on telegram-api-backend
+name: Testes Cypress manuais
 
 on:
-  workflow_dispatch: # permite execução manual na aba "Actions"
+  workflow_dispatch:  # permite execução manual
 
 jobs:
-  backend-e2e-tests:
-    name: Testes Automatizados E2E (Backend)
+  run-tests:
     runs-on: ubuntu-latest
 
-    steps: # Tarefas do job
-    
-      - name: Clonar repositório (backend)
-        uses: actions/checkout@v4
-        with:
-          repository: edcaetanoguedes/telegram-api-backend # Ambos os repos deve estar na mesma conta/organização
-          token: ${{ secrets.GH_TELEGRAM_API_TESTS_TOKEN }}
-          # Define uma pasta com nome onde o repo será clonado
-          # Bom pra quando se lida com mais de um projeto (ex: frontend, backend)
-          path: telegram-api-backend
-          # Define qual branch/tag será clonada
-          ref: main
-
-      - name: Instalar dependências (backend)
-        working-directory: telegram-api-backend # Seta a pasta definida em path
-        run: npm ci
-      
-      - name: Testar manualmente porta 4000
-        run: curl -v http://localhost:4000 || echo "falhou"
-
-      - name: Iniciar aplicação na porta 4000 (backend)
-        working-directory: telegram-api-backend # Seta a pasta definida em path
-        run: npm start & 
-
-      - name: Esperar a aplicação estar disponível (backend)
-        run: npx wait-on http://localhost:4000
-
+    steps:
       - name: Clonar repositório de testes
         uses: actions/checkout@v4
-        with:
-          repository: edcaetanoguedes/telegram-api-automated-tests
-          path: telegram-api-automated-tests
 
-      - name: Instalar dependências (tests)
-        working-directory: telegram-api-automated-tests
+      - name: Clonar repositório da aplicação (ex: backend)
+        run: |
+          git clone https://github.com/edcaetanoguedes/telegram-api-backend.git app
+
+      - name: Instalar dependências da aplicação
+        working-directory: app
         run: npm ci
 
-      - name: Executar testes
-        working-directory: telegram-api-automated-tests
-        # Comando para rodar os testes
-        run: npm run test:cy:backend
+      - name: Iniciar aplicação em background
+        working-directory: app
+        run: |
+          npm start &  # ou `npm run dev &` se for estável
+          sleep 5
+
+      - name: Verificar se a aplicação está no ar
+        run: npx wait-on http://localhost:4000
+
+      - name: Instalar dependências de testes
+        run: npm ci
+
+      - name: Rodar testes Cypress
+        run: npm run test:cy
