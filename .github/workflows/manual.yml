@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-tests:
+  backend-e2e-tests-automated:
+    name: Testes Automatizados E2E (Backend)
     runs-on: ubuntu-latest
 
     steps:
@@ -14,7 +15,7 @@ jobs:
           repository: edcaetanoguedes/telegram-api-backend
           token: ${{ secrets.GITHUB_TELEGRAM_API_TESTS_TOKEN }}
           path: telegram-api-backend
-          ref: main
+          ref: develop
 
       - name: Instalar dependências da aplicação (backend)
         working-directory: telegram-api-backend
@@ -30,14 +31,9 @@ jobs:
 
       - name: Clonar repositório de testes (atual)
         uses: actions/checkout@v4
-        with:
-          repository: edcaetanoguedes/telegram-api-automated-tests
-          path: telegram-api-automated-tests
 
       - name: Instalar dependências de testes (Cypress)
-        working-directory: telegram-api-automated-tests
         run: npm ci
 
       - name: Rodar testes Cypress
-        working-directory: telegram-api-automated-tests
         run: npm run test:cy:all
