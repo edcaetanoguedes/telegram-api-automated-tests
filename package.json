@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test:cy:open": "cypress open"
+    "test:cy:open": "cypress open",
+    "test:cy:all": "cypress run"
   },
   "author": "",
   "license": "ISC",
