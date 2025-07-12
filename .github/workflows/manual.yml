@@ -9,9 +9,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar backend com git clone
-        run: |
-          git clone https://x-access-token:${{ secrets.GH_TELEGRAM_API_TESTS_TOKEN }}@github.com/edcaetanoguedes/telegram-api-backend.git telegram-api-backend
+      - name: Clonar repositório (backend)
+        uses: actions/checkout@v4
+        with:
+          repository: edcaetanoguedes/telegram-api-backend # Ambos os repos deve estar na mesma conta/organização
+          # Token da conta com permissões
+          token: ${{ secrets.GH_TELEGRAM_API_TESTS_TOKEN }}
+          # Define uma pasta com nome onde o repo será clonado
+          # Bom pra quando se lida com mais de um projeto (ex: frontend, backend)
+          path: telegram-api-backend
+          # Define qual branch/tag será clonada
+          ref: main
 
 
       - name: Instalar dependências da aplicação (backend)
