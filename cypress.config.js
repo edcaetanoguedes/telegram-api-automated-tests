@@ -6,6 +6,7 @@ require("dotenv").config();
 
 
 module.exports = defineConfig({
+  video: false,
   e2e: {
     //baseUrl: "http://localhost:4000",
     specPattern: "cypress/e2e/**/**/*.feature",
