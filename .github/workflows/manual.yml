@@ -24,7 +24,7 @@ jobs:
 
       - name: Instalar dependências da aplicação (backend)
         working-directory: telegram-api-backend
-        run: npm ci
+        run: npm install
 
       - name: Iniciar aplicação em background
         working-directory: telegram-api-backend
@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Instalar dependências de testes (Cypress)
-        run: npm ci
+        run: npm install
 
       - name: Rodar testes Cypress
         run: npm run test:cy:all
