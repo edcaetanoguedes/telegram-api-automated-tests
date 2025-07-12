@@ -29,15 +29,12 @@ jobs:
       - name: Iniciar aplicação em background
         working-directory: telegram-api-backend
         run: |
-          npm start &
-
-      - name: Esperar aplicação subir
-        working-directory: telegram-api-backend
-        run: npx wait-on http://localhost:4000
-
+          npm start
       - name: Clonar repositório de testes (atual)
         uses: actions/checkout@v4
 
+      - name: Esperar aplicação subir
+        run: npx wait-on http://localhost:4000
       - name: Instalar dependências de testes (Cypress)
         run: npm install
 
