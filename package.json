@@ -3,25 +3,36 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:cy:open": "cypress open",
+    "test:cy:run": "cypress run"
   },
   "author": "https://github.com/edcaetanoguedes",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/json": "^0.13.0",
     "commitizen": "^4.3.1",
+    "cypress": "^14.5.1",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv": "^17.2.0",
     "eslint": "^9.31.0",
     "husky": "^8.0.0",
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2"
   },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/e2e/**/**/*.js"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "joi": "^17.13.3"
   }
 }
