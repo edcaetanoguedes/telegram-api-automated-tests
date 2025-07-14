@@ -3,6 +3,14 @@ name: Backend Automated Tests on telegram-api-backend
 
 on:
   workflow_dispatch: # permite execução manual na aba "Actions"
+  workflow_call: # permite ser chamado por outro workflow
+    inputs: # permite receber parâmetros externos
+      current-branch: # nome do parâmetro que será recebido
+        required: true # torna obrigatório
+        type: string # tipo recebido
+    secrets: # permissões necessárias
+      GH_TELEGRAM_API_TESTS_TOKEN: # secret que contém o token que dá/limita permissões
+        required: true # torna obrigatório
 
 jobs:
   backend-e2e-tests:
@@ -11,6 +19,10 @@ jobs:
 
     steps: # Tarefas do job
       
+      - name: Buscar branch a ser testada
+        run: |
+          echo "Branch: ${{ inputs.current-branch }}"
+
       - name: Clonar repositório (backend)
         uses: actions/checkout@v4
         with:
@@ -21,7 +33,7 @@ jobs:
           # Bom pra quando se lida com mais de um projeto (ex: frontend, backend)
           path: telegram-api-backend
           # Define qual branch/tag será clonada
-          ref: main
+          ref: ${{ inputs.current-branch }}
 
       - name: Instalar dependências (backend)
         working-directory: telegram-api-backend # Seta a pasta definida em path
