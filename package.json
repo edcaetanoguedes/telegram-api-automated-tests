@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test:cy:open": "cypress open",
-    "test:cy:run": "cypress run"
+    "test:cy:run": "cypress run",
+    "test:cy:smoke": "cypress run --env TAGS=@smoke",
+    "test:cy:regress": "cypress run --env TAGS=@regressivo",
+    "test:cy:backend": "cypress run --env TAGS=@backend"
   },
   "author": "https://github.com/edcaetanoguedes",
   "license": "ISC",
