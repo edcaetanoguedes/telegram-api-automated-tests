@@ -64,4 +64,4 @@ jobs:
       - name: Executar testes
         working-directory: telegram-api-automated-tests
         # Comando para rodar os testes
-        run: npm run test:cy:run
+        run: npm run test:cy:regress
