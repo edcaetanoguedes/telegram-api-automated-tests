@@ -49,7 +49,7 @@ jobs:
 
       - name: Esperar a aplicação estar disponível (backend)
         working-directory: telegram-api-backend # Seta a pasta definida em path
-        run: ./node_modules/.bin/wait-on http://localhost:4000/
+        run: npx wait-on http://localhost:4000/
 
       - name: Clonar repositório de testes
         uses: actions/checkout@v4
@@ -64,4 +64,4 @@ jobs:
       - name: Executar testes
         working-directory: telegram-api-automated-tests
         # Comando para rodar os testes
-        run: npm run test:cy:regress
+        run: npm run test:cy:backend
