@@ -43,6 +43,10 @@ jobs:
         working-directory: telegram-api-backend # Seta a pasta definida em path
         run: npm start &
 
+      - name: Esperar a aplicação estar disponível (backend)
+        working-directory: telegram-api-automated-tests # Seta a pasta definida em path
+        run: npx wait-on http://localhost:4000/api/v1/status
+
       - name: Clonar repositório de testes
         uses: actions/checkout@v4
         with:
@@ -52,14 +56,6 @@ jobs:
       - name: Instalar dependências (tests)
         working-directory: telegram-api-automated-tests
         run: npm ci
-
-      - name: Verificar se wait-on está instalado
-        working-directory: telegram-api-automated-tests
-        run: ls node_modules/.bin/wait-on
-
-      - name: Esperar a aplicação estar disponível (backend)
-        working-directory: telegram-api-automated-tests # Seta a pasta definida em path
-        run: npx wait-on http://localhost:4000/api/v1/status
 
       - name: Executar testes
         working-directory: telegram-api-automated-tests
