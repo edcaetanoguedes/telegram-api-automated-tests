@@ -41,10 +41,9 @@ jobs:
 
       - name: Iniciar aplicação na porta 4000 (backend)
         working-directory: telegram-api-backend # Seta a pasta definida em path
-        run: npm start &
+        run: npm run dev & 
 
       - name: Esperar a aplicação estar disponível (backend)
-        working-directory: telegram-api-backend # Seta a pasta definida em path
         run: npx wait-on http://localhost:4000
 
       - name: Clonar repositório de testes
